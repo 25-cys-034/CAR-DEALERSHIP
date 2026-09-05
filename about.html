@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>About | AutoHaus</title>
+
+<style>
+/* ===== Global Styles ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    color: #fff;
+    background: url("images/image21.jpeg") no-repeat center center fixed;
+    background-size: cover;
+    overflow-x: hidden;
+}
+
+/* Dark Overlay */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.65);
+    z-index: -1;
+}
+
+/* ===== Header ===== */
+header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    padding: 18px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(0,0,0,0.85);
+    backdrop-filter: blur(12px);
+}
+
+.logo {
+    font-size: 1.9rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    margin-left: 30px;
+    position: relative;
+    transition: 0.3s;
+}
+
+nav a::after {
+    content: "";
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    background: #f39c12;
+    bottom: -6px;
+    left: 0;
+    transition: 0.3s;
+}
+
+nav a:hover::after,
+nav a.active::after {
+    width: 100%;
+}
+
+nav a:hover,
+nav a.active {
+    color: #f39c12;
+}
+
+/* ===== Hero Section ===== */
+.hero {
+    height: 55vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.hero-text {
+    animation: fadeUp 1.4s ease;
+}
+
+.hero-text h1 {
+    font-size: 3.4rem;
+    margin-bottom: 12px;
+}
+
+.hero-text p {
+    font-size: 1.3rem;
+    color: #ddd;
+    margin-bottom: 18px;
+}
+
+.hero-text hr {
+    width: 80px;
+    height: 3px;
+    background: #f39c12;
+    border: none;
+    margin: 20px auto;
+}
+
+/* ===== Content Section ===== */
+.page-content {
+    max-width: 1100px;
+    margin: 80px auto;
+    padding: 20px;
+}
+
+/* Base glass-card (kept, enhanced via inline HTML) */
+.glass-card {
+    border-radius: 22px;
+    padding: 40px;
+    margin-bottom: 40px;
+    transition: 0.45s ease;
+    opacity: 0;
+    transform: translateY(50px);
+}
+
+.glass-card h3 {
+    font-size: 1.6rem;
+    margin-bottom: 14px;
+    color: #ffb347;
+    text-shadow: 0 2px 6px rgba(0,0,0,0.6);
+}
+
+.glass-card p {
+    font-size: 1.05rem;
+    color: rgba(255,255,255,0.92);
+    line-height: 1.8;
+}
+
+.glass-card:hover {
+    transform: translateY(-12px) scale(1.02);
+}
+
+/* ===== Footer ===== */
+footer {
+    text-align: center;
+    padding: 30px;
+    background: rgba(0,0,0,0.9);
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+}
+
+/* ===== Animations ===== */
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">AutoHaus</div>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="about.html" class="active">About</a>
+        <a href="cars.html">Cars</a>
+        <a href="contact.html">Contact</a>
+    </nav>
+</header>
+
+<section class="hero">
+    <div class="hero-text">
+        <h1>About AutoHaus</h1>
+        <p>Driven by Passion. Defined by Performance.</p>
+        <hr>
+    </div>
+</section>
+
+<section class="page-content" id="about-section">
+
+    <!-- Card 1 -->
+    <div class="glass-card reveal" style="
+        position: relative;
+        overflow: hidden;
+        background: linear-gradient(135deg,
+            rgba(255,255,255,0.14),
+            rgba(255,255,255,0.05)
+        );
+        backdrop-filter: blur(24px) saturate(180%);
+        -webkit-backdrop-filter: blur(24px) saturate(180%);
+        border: 1px solid rgba(255,255,255,0.2);
+        box-shadow:
+            0 20px 55px rgba(0,0,0,0.45),
+            inset 0 1px 2px rgba(255,255,255,0.3);
+    ">
+        <h3>Who We Are</h3>
+        <p>
+            AutoHaus is a premium automotive dealership located at
+            <strong>3995 Bristol Pike, Bensalem, PA 19020</strong>.
+            We specialize in luxury and performance vehicles that combine
+            precision engineering with timeless design.
+        </p>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="glass-card reveal" style="
+        position: relative;
+        overflow: hidden;
+        background: linear-gradient(135deg,
+            rgba(255,255,255,0.14),
+            rgba(255,255,255,0.05)
+        );
+        backdrop-filter: blur(24px) saturate(180%);
+        -webkit-backdrop-filter: blur(24px) saturate(180%);
+        border: 1px solid rgba(255,255,255,0.2);
+        box-shadow:
+            0 20px 55px rgba(0,0,0,0.45),
+            inset 0 1px 2px rgba(255,255,255,0.3);
+    ">
+        <h3>What We Provide</h3>
+        <p>
+            We offer carefully inspected vehicles, transparent pricing,
+            financing assistance, and a personalized buying experience
+            designed for true automotive enthusiasts.
+        </p>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="glass-card reveal" style="
+        position: relative;
+        overflow: hidden;
+        background: linear-gradient(135deg,
+            rgba(255,255,255,0.14),
+            rgba(255,255,255,0.05)
+        );
+        backdrop-filter: blur(24px) saturate(180%);
+        -webkit-backdrop-filter: blur(24px) saturate(180%);
+        border: 1px solid rgba(255,255,255,0.2);
+        box-shadow:
+            0 20px 55px rgba(0,0,0,0.45),
+            inset 0 1px 2px rgba(255,255,255,0.3);
+    ">
+        <h3>Why Choose Us</h3>
+        <p>
+            Built on trust, performance, and elegance, AutoHaus delivers a
+            smooth and reliable car-buying experience without compromise.
+        </p>
+    </div>
+
+</section>
+
+<footer>
+    <p>© 2026 AutoHaus | Bensalem, PA  All Rights Reserved</p>
+</footer>
+
+<!-- Scroll Reveal -->
+<script>
+const cards = document.querySelectorAll('.reveal');
+
+window.addEventListener('scroll', () => {
+    const trigger = window.innerHeight * 0.85;
+
+    cards.forEach(card => {
+        const cardTop = card.getBoundingClientRect().top;
+        if (cardTop < trigger) {
+            card.style.opacity = "1";
+            card.style.transform = "translateY(0)";
+            card.style.transition = "0.9s ease";
+        }
+    });
+});
+</script>
+
+</body>
+</html>

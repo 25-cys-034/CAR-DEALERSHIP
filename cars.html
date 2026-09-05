@@ -1,0 +1,551 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Cars | AutoHaus</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+      section h1 {
+        text-align: center;
+        margin-bottom: 10px;
+        color: #333;
+      }
+      section p {
+        margin: 20px;
+      }
+      /* ===== Car Grid Layout ===== */
+      .car-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        margin-top: 30px;
+        padding: 0 20px;
+      }
+
+      .car-card {
+        background: #fff;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        transition:
+          transform 0.3s,
+          box-shadow 0.3s;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .car-card img {
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
+      }
+
+      .car-card h3 {
+        font-size: 1.2rem;
+        margin: 10px 0 5px 0;
+      }
+
+      .car-card p {
+        font-size: 0.95rem;
+        margin: 2px 0;
+        color: #555;
+      }
+
+      .car-card .price {
+        font-weight: bold;
+        color: #e67e22;
+        margin-bottom: 10px;
+      }
+
+      .car-card button.view-more-btn {
+        margin: 10px auto 15px auto;
+        padding: 8px 16px;
+        background-color: #e67e22;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 1rem;
+        transition: background 0.3s;
+      }
+
+      .car-card button.view-more-btn:hover {
+        background-color: #cf711b;
+      }
+
+      .car-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+      }
+
+      /* ===== Modal Styles ===== */
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.8);
+        animation: fadeIn 0.3s;
+      }
+
+      .modal.active {
+        display: block;
+      }
+
+      .modal-content {
+        background-color: #fff;
+        margin: 50px auto;
+        padding: 20px;
+        border-radius: 12px;
+        width: 90%;
+        max-width: 600px;
+        position: relative;
+        text-align: center;
+        animation: slideUp 0.4s;
+      }
+
+      .modal-content img {
+        width: 100%;
+        height: 250px;
+        object-fit: cover;
+        margin-bottom: 15px;
+        border-radius: 8px;
+      }
+
+      .modal-content h2 {
+        margin-bottom: 10px;
+        color: #333;
+      }
+
+      .modal-content .close {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+        color: #333;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #fff;
+        border-radius: 50%;
+        transition: color 0.3s;
+      }
+
+      .modal-content .close:hover {
+        color: #e67e22;
+      }
+
+      /* ===== Animations ===== */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      @keyframes slideUp {
+        from {
+          transform: translateY(50px);
+        }
+        to {
+          transform: translateY(0);
+        }
+      }
+
+      /* ===== Responsive ===== */
+      @media (max-width: 600px) {
+        .car-card img {
+          height: 150px;
+        }
+        .modal-content img {
+          height: 180px;
+        }
+        .car-grid {
+          grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+          padding: 0 10px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="logo">Malik AutoHaus</div>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="cars.html">Cars</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </header>
+
+    <section class="page-content">
+      <h1>Available Cars</h1>
+      <p>
+        Browse our premium collection of luxury and performance vehicles in
+        Bristol.
+      </p>
+
+      <div class="car-grid">
+        <!-- Car 1 -->
+        <div class="car-card">
+          <img src="images/image1.jpeg" alt="BMW 5 Series" />
+          <h3>BMW 5 Series</h3>
+          <p class="short-desc">M-Sport, Heated Seats, Sunroof</p>
+          <p class="price">$8,900</p>
+          <button class="view-more-btn" data-modal="modal1">View More</button>
+        </div>
+
+        <!-- Car 2 -->
+        <div class="car-card">
+          <img src="images/image2.jpeg" alt="Mercedes C400 4Matic" />
+          <h3>Mercedes C400 4Matic</h3>
+          <p class="short-desc">Leather Heated Seats, LED, Executive Package</p>
+          <p class="price">$23,900</p>
+          <button class="view-more-btn" data-modal="modal2">View More</button>
+        </div>
+
+        <!-- Car 3 -->
+        <div class="car-card">
+          <img src="images/image3.jpeg" alt="Acura RDX Aspec SH-AWD" />
+          <h3>2022 Acura RDX Aspec SH-AWD</h3>
+          <p class="short-desc">27k miles, Black/Suede Interior</p>
+          <p class="price">$29,900</p>
+          <button class="view-more-btn" data-modal="modal3">View More</button>
+        </div>
+
+        <!-- Car 4 -->
+        <div class="car-card">
+          <img src="images/image4.jpeg" alt="Mercedes C400 4Matic 2015" />
+          <h3>2015 Mercedes C400 4Matic</h3>
+          <p class="short-desc">140k miles, Leather Heated Seats</p>
+          <p class="price">$14,900</p>
+          <button class="view-more-btn" data-modal="modal4">View More</button>
+        </div>
+
+        <!-- Car 5 -->
+        <div class="car-card">
+          <img src="images/image5.jpeg" alt="2022 Acura TLX Type S" />
+          <h3>2022 Acura TLX Type S</h3>
+          <p class="short-desc">Performance Package, Red Interior</p>
+          <p class="price">$38,900</p>
+          <button class="view-more-btn" data-modal="modal5">View More</button>
+        </div>
+
+        <!-- Car 6 -->
+        <div class="car-card">
+          <img src="images/image6.jpeg" alt="2015 BMW X5 X35i" />
+          <h3>2015 BMW X5 X35i</h3>
+          <p class="short-desc">140k miles, Leather Heated Seats</p>
+          <p class="price">$13,900</p>
+          <button class="view-more-btn" data-modal="modal6">View More</button>
+        </div>
+
+        <!-- Car 7 -->
+        <div class="car-card">
+          <img src="images/image7.jpeg" alt="2007 Lexus IS250 AWD" />
+          <h3>2007 Lexus IS250 AWD</h3>
+          <p class="short-desc">168k miles, Leather Interior</p>
+          <p class="price">$4,900</p>
+          <button class="view-more-btn" data-modal="modal7">View More</button>
+        </div>
+
+        <!-- Car 8 -->
+        <div class="car-card">
+          <img src="images/image8.jpeg" alt="2016 BMW M3" />
+          <h3>2016 BMW M3 6-Speed</h3>
+          <p class="short-desc">108k miles, Sahkir Orange Interior</p>
+          <p class="price">$36,900</p>
+          <button class="view-more-btn" data-modal="modal8">View More</button>
+        </div>
+
+        <!-- Car 9 -->
+        <div class="car-card">
+          <img src="images/image9.jpeg" alt="2017 Audi A4 2.0T Quattro" />
+          <h3>2017 Audi A4 2.0T Quattro</h3>
+          <p class="short-desc">100k miles, Heated Seats, Navigation</p>
+          <p class="price">$12,900</p>
+          <button class="view-more-btn" data-modal="modal9">View More</button>
+        </div>
+
+        <!-- Car 10 -->
+        <div class="car-card">
+          <img
+            src="images/image10.jpeg"
+            alt="2012 Mercedes-Benz C300 4-Matic"
+          />
+          <h3>2012 Mercedes C300 4-Matic</h3>
+          <p class="short-desc">118k miles, Leather Seats, Navigation</p>
+          <p class="price">$7,400</p>
+          <button class="view-more-btn" data-modal="modal10">View More</button>
+        </div>
+
+        <!-- Car 11 -->
+        <div class="car-card">
+          <img src="images/image11.jpeg" alt="2014 Lexus GX460 AWD" />
+          <h3>2014 Lexus GX460 AWD</h3>
+          <p class="short-desc">155k miles, Fully Loaded, 3rd Row</p>
+          <p class="price">$17,900</p>
+          <button class="view-more-btn" data-modal="modal11">View More</button>
+        </div>
+
+        <!-- Car 12 -->
+        <div class="car-card">
+          <img src="images/image12.jpeg" alt="2016 Mercedes-Benz CLS 400" />
+          <h3>2016 Mercedes-Benz CLS 400</h3>
+          <p class="short-desc">124k miles, Apple CarPlay, Heated Seats</p>
+          <p class="price">$15,900</p>
+          <button class="view-more-btn" data-modal="modal12">View More</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- MODALS (Placed at the end of body) -->
+    <!-- Modal 1 -->
+    <div id="modal1" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>2016 BMW 320i xDrive</h2>
+        <img src="images/image1.jpeg" alt="2016 BMW 320i xDrive" />
+        <p>
+          89,000 miles, Clean Title, just passed PA inspection. Engine &
+          transmission run smooth. Very clean inside and out. Navigation,
+          Bluetooth, heated seats, power sunroof, and more. Ready to go!
+        </p>
+        <p class="price">Price: $8,900</p>
+      </div>
+    </div>
+
+    <!-- Modal 2 -->
+    <div id="modal2" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>2015 BMW M4</h2>
+        <img src="images/image2.jpeg" alt="2015 BMW M4" />
+        <p>
+          131,000 miles, PA clean title, Clean Carfax. Engine & transmission run
+          smooth. Executive package includes leather heated seats, Bluetooth
+          audio, backup camera, heads-up display, LED headlights, keyless entry,
+          push-button start. Ready to go!
+        </p>
+        <p class="price">Price: $23,900</p>
+      </div>
+    </div>
+
+    <!-- Modal 3 -->
+    <div id="modal3" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>2022 Acura RDX Aspec SH-AWD</h2>
+        <img src="images/image3.jpeg" alt="Acura RDX Aspec SH-AWD" />
+        <p>
+          27,000 miles, PA reconstructed title. Engine & transmission run
+          smooth. Black/Suede interior, Apple CarPlay, adaptive cruise,
+          heated/cooled seats, parking sensors, Bluetooth audio, and more. Ready
+          to go!
+        </p>
+        <p class="price">Price: $29,900</p>
+      </div>
+    </div>
+
+    <!-- Modal 4 -->
+    <div id="modal4" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>2015 Mercedes C400 4Matic</h2>
+        <img src="images/image4.jpeg" alt="Mercedes C400 4Matic 2015" />
+        <p>
+          140,000 miles, clean PA title. Engine & transmission run smooth.
+          Leather heated seats, Bluetooth, backup camera, parking sensors,
+          push-to-start, adaptive headlights. Ready to go!
+        </p>
+        <p class="price">Price: $14,900</p>
+      </div>
+    </div>
+
+    <!-- Modal 5 -->
+    <div id="modal5" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>2022 Acura TLX Type S</h2>
+        <img src="images/image5.jpeg" alt="2022 Acura TLX Type S" />
+        <p>
+          19,000 miles, PA reconstructed title. Red interior, Apple CarPlay,
+          adaptive cruise, heated/cooled seats, jewel headlights, parking
+          sensors, Bluetooth audio. Fully loaded, ready to go!
+        </p>
+        <p class="price">Price: $38,900</p>
+      </div>
+    </div>
+
+    <!-- Modal 6 -->
+    <div id="modal6" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>2015 BMW X5 X35i</h2>
+        <img src="images/image6.jpeg" alt="2015 BMW X5 X35i" />
+        <p>
+          140,000 miles, clean PA title. Leather heated power seats, navigation,
+          Bluetooth, backup camera, parking sensors, HID headlights. 2 owners, 0
+          accidents. Ready to go!
+        </p>
+        <p class="price">Price: $13,900</p>
+      </div>
+    </div>
+
+    <!-- Modal 7 -->
+    <div id="modal7" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>2007 Lexus IS250 AWD</h2>
+        <img src="images/image7.jpeg" alt="2007 Lexus IS250 AWD" />
+        <p>
+          168,000 miles, PA title. Leather interior, heated/cooled seats, power
+          sunroof, LED headlights, sport bumpers. A/C & heat works. Very clean,
+          ready to go!
+        </p>
+        <p class="price">Price: $4,900</p>
+      </div>
+    </div>
+
+    <!-- Modal 8 -->
+    <div id="modal8" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>2016 BMW M3 6-Speed</h2>
+        <img src="images/image8.jpeg" alt="2016 BMW M3" />
+        <p>
+          108,000 miles, upgraded turbos, leather interior, heated seats,
+          Bluetooth, navigation, backup camera, push button start. Fully
+          maintained, ready to go!
+        </p>
+        <p class="price">Price: $36,900</p>
+      </div>
+    </div>
+
+    <!-- Modal 9 -->
+    <div id="modal9" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>2017 Audi A4 2.0T Quattro</h2>
+        <img src="images/image9.jpeg" alt="2017 Audi A4 2.0T Quattro" />
+        <p>
+          100,000 miles, clean title. Heated seats, Bluetooth, push-button
+          start, navigation. Engine & transmission run smooth, very clean. Ready
+          to go!
+        </p>
+        <p class="price">Price: $12,900</p>
+      </div>
+    </div>
+
+    <!-- Modal 10 -->
+    <div id="modal10" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>2012 Mercedes C300 4-Matic</h2>
+        <img src="images/image10.jpeg" alt="2012 Mercedes C300 4-Matic" />
+        <p>
+          118,000 miles, clean PA title. Leather heated seats, navigation,
+          Bluetooth, sunroof, very clean inside and out. Engine & transmission
+          run smooth. Ready to go!
+        </p>
+        <p class="price">Price: $7,400</p>
+      </div>
+    </div>
+
+    <!-- Modal 11 -->
+    <div id="modal11" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>2014 Lexus GX460 AWD</h2>
+        <img src="images/image11.jpeg" alt="2014 Lexus GX460 AWD" />
+        <p>
+          155,000 miles, clean title, fully loaded with parking sensors, backup
+          camera, blind spot monitor, HID headlights, rear DVD, 3rd row seating.
+          Engine & transmission run smooth.
+        </p>
+        <p class="price">Price: $17,900</p>
+      </div>
+    </div>
+
+    <!-- Modal 12 -->
+    <div id="modal12" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>2016 Mercedes-Benz CLS 400</h2>
+        <img src="images/image12.jpeg" alt="2016 Mercedes-Benz CLS 400" />
+        <p>
+          124,000 miles, clean PA title, Apple CarPlay/Android Auto,
+          heated/cooled seats, power sunroof. Engine & transmission run smooth,
+          ready to go!
+        </p>
+        <p class="price">Price: $15,900</p>
+      </div>
+    </div>
+
+    <footer>
+      <p>© 2026 AutoHaus, Bristol. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+      // Get all elements
+      const viewBtns = document.querySelectorAll(".view-more-btn");
+      const modals = document.querySelectorAll(".modal");
+      const closeBtns = document.querySelectorAll(".modal .close");
+
+      // Open modal when button is clicked
+      viewBtns.forEach((btn) => {
+        btn.addEventListener("click", (e) => {
+          e.preventDefault();
+          const modalId = btn.getAttribute("data-modal");
+          const modal = document.getElementById(modalId);
+          if (modal) {
+            modal.classList.add("active");
+            document.body.style.overflow = "hidden"; // Prevent scrolling
+          }
+        });
+      });
+
+      // Close modal when X is clicked
+      closeBtns.forEach((btn) => {
+        btn.addEventListener("click", (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          const modal = btn.closest(".modal");
+          if (modal) {
+            modal.classList.remove("active");
+            document.body.style.overflow = ""; // Restore scrolling
+          }
+        });
+      });
+
+      // Close modal when clicking outside
+      window.addEventListener("click", (e) => {
+        if (e.target.classList.contains("modal")) {
+          e.target.classList.remove("active");
+          document.body.style.overflow = ""; // Restore scrolling
+        }
+      });
+
+      // Close modal with Escape key
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") {
+          modals.forEach((modal) => {
+            modal.classList.remove("active");
+          });
+          document.body.style.overflow = ""; // Restore scrolling
+        }
+      });
+    </script>
+  </body>
+</html>

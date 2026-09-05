@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>AutoHaus | Contact</title>
+<style>
+/* ===== Global Styles ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    color: #fff;
+    overflow-x: hidden;
+}
+
+/* ===== Hero Section ===== */
+.hero {
+    height: 70vh;
+    background: url("images/image16.jpeg") center/cover no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+.hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.3);
+    z-index: 1;
+}
+.hero-panel {
+    position: relative;
+    z-index: 2;
+    background: rgba(255,255,255,0.02);
+    backdrop-filter: blur(14px);
+    padding: 25px 40px;
+    border-radius: 18px;
+    text-align: center;
+    max-width: 600px;
+    box-shadow: 0 12px 35px rgba(0,0,0,0.5);
+    transition: 0.3s;
+}
+.hero-panel:hover {
+    box-shadow: 0 18px 45px rgba(243,177,60,0.25);
+}
+.hero-panel h1 {
+    font-size: 2.5rem;
+    letter-spacing: 1.5px;
+    margin-bottom: 10px;
+    color: #f3b13c;
+}
+.hero-panel p {
+    font-size: 1rem;
+    color: #eee;
+    margin-bottom: 15px;
+    line-height: 1.4;
+}
+.hero-panel .btn {
+    display: inline-block;
+    padding: 10px 30px;
+    border-radius: 50px;
+    background: linear-gradient(45deg, #f3b13c, #ffc870);
+    color: #000;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 0.9rem;
+    margin: 5px 5px;
+    transition: 0.3s;
+}
+.hero-panel .btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 18px rgba(243,177,60,0.5);
+}
+
+/* ===== Header ===== */
+header {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    padding: 16px 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 10;
+}
+.logo {
+    font-size: 1.7rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    color: #f3b13c;
+}
+nav a {
+    color: #fff;
+    text-decoration: none;
+    margin-left: 20px;
+    font-size: 0.95rem;
+    position: relative;
+}
+nav a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    width: 0%;
+    height: 2px;
+    background: #f3b13c;
+    transition: 0.3s;
+}
+nav a:hover::after,
+nav a.active::after {
+    width: 100%;
+}
+nav a:hover {
+    color: #f3b13c;
+}
+
+/* ===== Contact Section ===== */
+.contact-section {
+    padding: 70px 8%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 35px;
+    background: #0b0b0b;
+}
+.contact-card {
+    background: rgba(255,255,255,0.015);
+    backdrop-filter: blur(14px);
+    border-radius: 16px;
+    padding: 25px 20px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+    font-size: 0.9rem;
+    transition: 0.3s;
+}
+.contact-card h3 {
+    font-size: 1.3rem;
+    color: #f3b13c;
+    margin-bottom: 8px;
+}
+.contact-card p, .contact-card a {
+    color: #ddd;
+    line-height: 1.5;
+    font-size: 0.9rem;
+}
+.contact-card a {
+    color: #f3b13c;
+    text-decoration: none;
+    transition: 0.3s;
+}
+.contact-card a:hover {
+    text-decoration: underline;
+}
+.contact-card:hover {
+    transform: translateY(-5px) scale(1.01);
+    box-shadow: 0 15px 40px rgba(243,177,60,0.2);
+}
+
+/* ===== Map ===== */
+.map-container {
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+    height: 320px;
+}
+.map-container iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+/* ===== Footer ===== */
+footer {
+    background: #000;
+    padding: 22px;
+    text-align: center;
+    font-size: 0.85rem;
+    color: #ccc;
+    letter-spacing: 0.5px;
+}
+</style>
+</head>
+<body>
+
+<header>
+    <div class="logo">AutoHaus</div>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="cars.html">Cars</a>
+        <a href="contact.html" class="active">Contact</a>
+    </nav>
+</header>
+
+<section class="hero">
+    <div class="hero-panel">
+        <h1>Contact AutoHaus</h1>
+        <p>Premium Car Dealership in Bristol<br>
+        3995 Bristol Pike, Bensalem, PA 19020</p>
+        <a href="https://www.malikautohaus.com/" target="_blank" class="btn">Official Website</a>
+        <a href="https://www.instagram.com/malikautohaus/" target="_blank" class="btn">Instagram Profile</a>
+    </div>
+</section>
+
+<section class="contact-section">
+    <div class="contact-card">
+        <h3>Get in Touch</h3>
+        <p>Email: <a href="mailto:info@autohaus.com">info@autohaus.com</a></p>
+        <p>Phone: <a href="tel:+1(267) 922-3095">+1(267) 922-3095</a></p>
+        <p>Address: 3995 Bristol Pike, Bensalem, PA 19020</p>
+        <p>Website: <a href="https://www.malikautohaus.com/" target="_blank">www.malikautohaus.com</a></p>
+        <p>Instagram: <a href="https://www.instagram.com/malikautohaus/" target="_blank">@malikautohaus</a></p>
+    </div>
+    <div class="map-container">
+        <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3068.515819065672!2d-74.93450408462334!3d40.08177587940262!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c6e8a6c394be0f%3A0x5b3c12d08e7d7b2!2s3995%20Bristol%20Pike%2C%20Bensalem%2C%20PA%2019020!5e0!3m2!1sen!2sus!4v1706231912345!5m2!1sen!2sus"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+    </div>
+</section>
+
+<footer>
+    <p>© 2026 AutoHaus, Bristol  Crafted for Excellence</p>
+</footer>
+
+</body>
+</html>
